@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en-us">
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width" />
+
+      <link rel="icon" href="../res/img/allgau_logo_icon_16.png" sizes="16x16"/>
+
+      <link rel="stylesheet" href="../css/lib/material_icons.css">
+      <link rel="stylesheet" href="../css/common.css">
+      <link rel="stylesheet" href="../css/base.css">
+
+      <link rel="stylesheet" href="../css/login_section.css">
+      <link rel="stylesheet" href="../css/storage_section.css">
+
+      <!--
+      <link rel="import" href="../bower_components/paper-ripple/paper-ripple.html">
+      <link rel="import" href="../bower_components/paper-input/paper-input.html">
+      -->
+
+      <link rel="import" href="https://www.polymer-project.org/0.5/components/paper-ripple/paper-ripple.html">
+      <link rel="import" href="https://www.polymer-project.org/0.5/components/paper-input/paper-input.html">
+
+      <!--
+      <link rel="import" href="../css/polymer.html">
+      <style is="custom-style" include="polymer"></style>
+      -->
+
+      <script src="../js/lib/jquery-2.2.0.min.js"></script>
+      <script src="../js/navigation.js"></script>
+      <script src="../js/login_section.js"></script>
+      <script src="../js/storage_section.js"></script>
+      <script src="../js/product_reg_section.js"></script>
+      <script src="../js/product_view_section.js"></script>
+
+      <title>Allgäu</title>
+   </head>
+   <body>
+      <header>
+         <button id="drawerToggleBtn" class="rippleBtn">
+            <i class="material-icons">menu</i>
+            <paper-ripple fit/>
+         </button>
+
+         <div id="headerTitleDiv">
+            <span>Allgäu</span>
+            <span>|</span>
+            <span>bookery</span>
+         </div>
+
+         <div id="appBarActionDiv">
+            <button id="moreBtn" class="rippleBtn">
+               <i class="material-icons">more_vert</i>
+               <paper-ripple fit/>
+            </button>
+         </div>
+      </header>
+
+
+      <div id="drawerAndSectionDiv">
+         <nav id="drawer">
+            <div id="drawerLoginDiv">
+               <button id="drawerLoginBtn" onclick="goToHash('#login')">
+                  <img class="circledImg" src="../res/img/user.png"/>
+                  <span>Guilherme Reginaldo</span>
+                  <paper-ripple fit/>
+               </button>
+            </div>
+
+            <button id="storage_sectionBtn" onclick="goToHash('#storage')">
+               <i class="material-icons">drafts</i>
+               <span>Storage</span>
+               <paper-ripple fit/>
+            </button>
+
+            <button id="sells_sectionBtn" onclick="goToHash('#sells')">
+               <i class="material-icons">monetization_on</i>
+               <span>Sells</span>
+               <paper-ripple fit/>
+            </button>
+
+            <button>
+               <i class="material-icons">event</i>
+               <span>Lendings</span>
+               <paper-ripple fit/>
+            </button>
+
+            <div class="divider"></div>
+
+            <button>
+               <i class="material-icons">settings</i>
+               <span>Settings</span>
+               <paper-ripple fit/>
+            </button>
+
+            <button>
+               <i class="material-icons">help</i>
+               <span>Help &amp; feedback</span>
+               <paper-ripple fit/>
+            </button>
+         </nav>
+
+         <main id="mainContent">
+
+
+            <!-- * Login's section * -->
+            <section id="login_section" class="formSection">
+               <form method="post">
+                  <img id="loginSection_personImg" class="circledImg whiteBorder" src="../res/img/user.png"/>
+                  <span id="loginSection_welcomeOut">Welcome</span>
+                  <paper-input auto-validate id="loginSection_loginIn" label="Login name" error-message="Please inform your login" required></paper-input>
+                  <paper-input auto-validate id="loginSection_passwordIn" type="password" label="Password" error-message="Please inform your password" required></paper-input>
+                  <button type="submit" id="loginSection_confirmBtn" class="rippleBtn raised">
+                     LOGIN
+                     <paper-ripple fit/>
+                  </button>
+               </form>
+            </section>
+
+
+            <!-- * Storage's section * -->
+            <section id="storage_section" class="listSection">
+               <ul id="storage_sectionList">
+               </ul>
+               <button class="fab raised listFab" onclick="goToHash('#productReg')">
+                  <i class="material-icons">add</i>
+                  <paper-ripple fit/>
+               </button>
+            </section>
+
+
+            <!-- * Product's registration section * -->
+            <section id="productReg_section" class="formSection">
+               <form id="productRegForm" method="post">
+                  <div class="formRow">
+                     <i class="material-icons">label</i>
+                     <paper-input id="productRegSection_labelIn" type="text" label="Label" error-message="Please inform the product's name" required auto-validate></paper-input>
+                  </div>
+                  <div class="formRow">
+                     <i class="material-icons">description</i>
+                     <paper-input id="productRegSection_descriptionIn" type="text" label="Description" error-message="Please inform the product's description" required auto-validate></paper-input>
+                  </div>
+                  <div class="formRow">
+                     <i class="material-icons">attach_money</i>
+                     <paper-input id="productRegSection_priceIn" type="text" label="Price per unit" error-message="Please inform the product's price" required auto-validate></paper-input>
+                  </div>
+                  <div class="formRow">
+                     <i class="material-icons">drafts</i>
+                     <paper-input id="productRegSection_quantityIn" type="text" label="Quantity on storage" error-message="Please inform the quantity" required auto-validate></paper-input>
+                  </div>
+
+               </form>
+               <button type="submit" form="productRegForm" class="fab raised listFab">
+                  <i class="material-icons">check</i>
+                  <paper-ripple fit/>
+               </button>
+            </section>
+
+
+            <!-- * Product's view section * -->
+
+            <section id="productView_section" class="listSection">
+               <button class="fab raised listFab" onclick="goToHash('#login')">
+                  <i class="material-icons">add</i>
+                  <paper-ripple fit/>
+               </button>
+            </section>
+
+         </main>
+      </div>
+
+      <div id="transparencyDiv"></div>
+   </body>
+</html>

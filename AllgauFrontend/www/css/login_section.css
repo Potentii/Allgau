@@ -1,0 +1,26 @@
+#login_section form{
+   width: 100%;
+}
+#login_section form > input, #login_section form > paper-input, #login_section form > button{
+   max-width: 20em;
+}
+
+#loginSection_personImg{
+	width: 4em;
+	height: 4em;
+}
+#loginSection_confirmBtn{
+   background: #E65100;
+   color: #F5F5F5;
+   margin: 2em auto;
+}
+#loginSection_welcomeDiv{
+   position: absolute;
+   width: 100%;
+   z-index: 1;
+}
+#loginSection_welcomeOut{
+   text-align: center;
+   /*font-size: 2em;*/
+   color: #424242;
+}

@@ -1,3 +1,8 @@
-platforms/
-www/bower_component/
+AllgauFrontend/platforms/
+AllgauFrontend/plugins/
+AllgauFrontend/www/bower_components/
+
+AllgauBackend/target/
+AllgauBackend/build/
+
 *.db

@@ -1,0 +1,324 @@
+/*
+	- Colors
+		main      : (Grey-900)    : #212121;
+		accent-1  : (Orange-900)  : #E65100;
+		accent-2  : (Amber-500)   : #FFC107;
+
+		light     : (Grey-100)    : #F5F5F5;
+		mid		 : (Grey-800)    : #424242;
+		dark      : (Grey-900)    : #212121;
+
+	- Sizes
+		padding:  1em;
+		appBar-height:  3.5em;
+		drawer-width: 16em;
+
+*/
+
+
+
+/*
+ *  * ========== * ========== * ========== * ========== * ========== *
+ *  * AppBar:
+ *  * ========== * ========== * ========== * ========== * ========== *
+ */
+header{
+	position: fixed;
+	width: 100%;
+	padding: 0.5em;
+
+	background: #212121;
+
+	z-index: 2;
+	box-shadow: 0em 0.2em 0.3em rgba(0, 0, 0, 0.4);
+}
+header > *{
+	position: relative;
+	display: inline-block;
+	vertical-align: middle;
+
+}
+
+/*
+ *	Appbar's title
+ */
+#headerTitleDiv{
+	padding: 0.5em;
+}
+#headerTitleDiv > span{
+	margin-right: 0.2em;
+	font-family: Seagram;
+	text-shadow: 1px 1px rgba(0, 0, 0, 0.7);
+}
+#headerTitleDiv > span:nth-child(1){
+	color: #E65100;
+	font-size: 1.3em;
+}
+#headerTitleDiv > span:nth-child(n+2){
+	color: #F5F5F5;
+	font-size: 1.2em;
+}
+
+/*
+ *	Appbar's action buttons
+ */
+#appBarActionDiv{
+	float: right;
+}
+header .rippleBtn{
+	position: relative;
+	display: inline-block;
+	padding: 1em;
+	border-radius: 50%;
+	color: #F5F5F5;
+}
+header .rippleBtn > .material-icons{
+	display: block;
+	font-size: 2em;
+	vertical-align: middle;
+}
+header .rippleBtn > paper-ripple{
+	overflow: hidden;
+	border-radius: 50%;
+	z-index: 1;
+}
+
+
+
+/*
+ *  * ========== * ========== * ========== * ========== * ========== *
+ *  * Drawer:
+ *  * ========== * ========== * ========== * ========== * ========== *
+ */
+#drawer{
+	position: fixed;
+	height: 100%;
+	background: #eee;
+
+	box-shadow: 0.2em 0em 0.4em rgba(0, 0, 0, 0.4);
+
+	z-index: 3;
+	overflow-y: auto;
+	overflow-x: hidden;
+	transition: width 0.3s ease;
+}
+.drawer-closed{
+	width: 0;
+}
+.drawer-opened{
+	width: 16em;
+}
+/*
+ *	Drawer's divider
+ */
+#drawer > .divider{
+	height: 1pt;
+	width: 100%;
+
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+/*
+ *	Drawer's buttons
+ */
+#drawer > button{
+	position: relative;
+	display: inline-block;
+	width: 100%;
+	padding: 1em;
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+
+	font-size: 1em;
+	color: #212121;
+
+	white-space: nowrap;
+	text-align: left;
+	transition: background 0.2s ease;
+}
+#drawer > button:hover{
+	background: #e2e2e2;
+
+	transition: background 0.1s linear;
+}
+#drawer > button:active{
+	background: #d2d2d2;
+
+	transition: background 0.15s ease;
+}
+#drawer > button > i{
+	/* Icon */
+	margin-right: 0.5em;
+
+	/*font-size: 2em;*/
+	color: #212121;
+
+	vertical-align: middle;
+}
+#drawer > button > span{
+	/* Text */
+	margin-left: 0.5em;
+
+	/*font-size: 1.2em;*/
+	color: #616161;
+	font-family: Roboto Regular;
+
+	vertical-align: middle;
+}
+#drawer > button > paper-ripple {
+  overflow: hidden;
+}
+
+/*
+ *	Drawer's login container
+ */
+#drawerLoginDiv{
+	position: relative;
+	width: 100%;
+
+	padding-bottom: 2em;
+	padding-top: 6em;
+
+	background-image: url(../res/img/bg.jpg);
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+#drawerLoginDiv > button{
+	position: relative;
+	display: flex;
+	width: 100%;
+	max-height: 4.5em;
+	padding: 0.5em;
+	cursor: pointer;
+	overflow: hidden;
+	color: #F5F5F5;
+}
+#drawerLoginDiv .circledImg{
+	width: 3.5em;
+	height: 3.5em;
+	box-shadow: 0em 0.2em 0.2em rgba(0, 0, 0, 0.4);
+}
+#drawerLoginDiv span{
+	font-size: 1.15em;
+	text-align: left;
+	white-space: nowrap;
+	margin: auto 0 auto 1em;
+	color: #F5F5F5;
+	text-shadow: 0em 0.1em 0.2em rgba(0, 0, 0, 0.6);
+}
+
+/*
+ *	Transparency panel
+ */
+#transparencyDiv{
+	display: block;
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	background: #000;
+
+	transition: opacity 0.3s ease;
+}
+.transparencyDiv-hided{
+	z-index: -1;
+	opacity: 0;
+}
+.transparencyDiv-showed{
+	z-index: 2;
+	opacity: 0.85;
+}
+
+
+/*
+ *  * ========== * ========== * ========== * ========== * ========== *
+ *  * Main content:
+ *  * ========== * ========== * ========== * ========== * ========== *
+ */
+#mainContent{
+	position: fixed;
+	height: 100%;
+	width: 100%;
+	max-height: 100%;
+	max-width: 100%;
+
+	padding-top: 4.5em;
+
+	background: #F5F5F5;
+}
+
+/*
+ *	Form's containers
+ */
+.formSection{
+	top: 0px;
+	bottom:0px;
+	height: 100%;
+	overflow-y: auto;
+}
+.formSection > form{
+	display: flex;
+	flex-flow: column;
+	min-width: 18em;
+	max-width: 50%;
+	margin: 2em auto;
+	padding-bottom: 3em;
+}
+.formSection > form > *{
+	position: relative;
+	margin: 0.5em auto;
+	width: 100%;
+}
+.formSection form > button{
+	margin-top: 4em;
+	background-color: #E65100;
+	color: #F5F5F5;
+}
+
+/*
+ *	Form's rows
+ */
+.formRow{
+	display: inline-flex;
+	width: 100%;
+	flex-flow: row;
+	vertical-align: middle;
+}
+.formRow > *:not(.material-icons){
+	flex-grow: 1;
+}
+.formRow > .material-icons{
+	display: inline-block;
+	font-size: 1.5em;
+	margin: auto 1em auto 0;
+	color: #424242;
+}
+
+
+
+
+
+
+.listSection{
+	overflow-y: auto;
+	top: 0px;
+	bottom:0px;
+	height: 100%;
+}
+
+
+.listSection .row{
+	display: block;
+	position: relative;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+	list-style-type: none;
+	padding: 1em;
+	transition: background 0.2s ease;
+	cursor: pointer;
+	overflow: hidden;
+}
+.listSection .row:hover{
+   background: rgba(0, 0, 0, 0.08);
+	transition: background 0.1s ease;
+}
