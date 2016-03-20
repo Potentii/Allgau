@@ -3,10 +3,18 @@ var SERVER_ADDRESS = "192.168.1.31";
 var SERVER_PORT = "9090";
 var SERVER_APPLICATION = "AllgauBackend";
 
-var user_id;
-var user_name;
+var saveUser_session = true;
 
+var user_id = null;
+var user_name = null;
+var user_img = null;
+
+var default_person_img = "../res/img/default_person.png";
+var default_book_img = "../res/img/default_book.png";
+
+var DEFAULT_SECTION;
 var LOGIN_SECTION;
+var PROFILE_SECTION;
 var STORAGE_SECTION;
 var PRODUCT_REG_SECTION;
 var PRODUCT_VIEW_SECTION;
@@ -28,18 +36,35 @@ $(document).ready(function(){
    transparencyDiv = $("#transparencyDiv");
 
 
-   LOGIN_SECTION = $("#login_section");
-   STORAGE_SECTION = $("#storage_section");
-   PRODUCT_REG_SECTION = $("#productReg_section");
+   DEFAULT_SECTION      = $("#default_section");
+   LOGIN_SECTION        = $("#login_section");
+   PROFILE_SECTION      = $("#profile_section");
+   STORAGE_SECTION      = $("#storage_section");
+   PRODUCT_REG_SECTION  = $("#productReg_section");
    PRODUCT_VIEW_SECTION = $("#productView_section");
 
 
    sectionArray = [
+      DEFAULT_SECTION,
       LOGIN_SECTION,
+      PROFILE_SECTION,
       STORAGE_SECTION,
       PRODUCT_REG_SECTION,
       PRODUCT_VIEW_SECTION
    ];
+
+
+   // *If not supposed to save user's info, erase it:
+   if(!saveUser_session){
+      sessionStorage.removeItem("user_id");
+      sessionStorage.removeItem("user_name");
+      sessionStorage.removeItem("user_img");
+   }
+
+   // *Retrieving login info from session:
+   user_id     = sessionStorage.getItem("user_id");
+   user_name   = sessionStorage.getItem("user_name");
+   user_img    = sessionStorage.getItem("user_img");
 
 
    // *Loading the current requested hash:
@@ -72,23 +97,28 @@ $(window).on('hashchange', function() {
    resolveHash(window.location.hash);
 });
 
-
-
 function goToHash(hash, queryString){
    queryString = !queryString ? "":queryString;
    window.location.href = window.location.pathname + queryString + hash;
 }
 
 function resolveHash(hash){
-   switch(hash){
-   case '':
-      // *Default section:
+   // *Only allows not logged users to access login section:
+   if(hash !== "#login" && user_id===null){
       goToHash("#login");
-      break;
+      return;
+   }
+
+   switch(hash){
    case '#login':
       currentSection = LOGIN_SECTION;
       focusOnCurrentSection();
       loadLoginSection();
+      break;
+   case '#profile':
+      currentSection = PROFILE_SECTION;
+      focusOnCurrentSection();
+      loadProfileSection();
       break;
    case '#storage':
       currentSection = STORAGE_SECTION;
@@ -104,6 +134,12 @@ function resolveHash(hash){
       currentSection = PRODUCT_VIEW_SECTION;
       focusOnCurrentSection();
       loadProductViewSection();
+      break;
+
+   default:
+      // *Default section:
+      currentSection = DEFAULT_SECTION;
+      focusOnCurrentSection();
       break;
    }
 }
@@ -175,34 +211,3 @@ function getQueryString(key, url) {
    if (!results[2]) return '';
    return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
-/*
-function UpdateQueryString(key, value, url) {
-    if (!url) url = window.location.href;
-    var re = new RegExp("([?&])" + key + "=.*?(&|#|$)(.*)", "gi"),
-        hash;
-
-    if (re.test(url)) {
-        if (typeof value !== 'undefined' && value !== null)
-            return url.replace(re, '$1' + key + "=" + value + '$2$3');
-        else {
-            hash = url.split('#');
-            url = hash[0].replace(re, '$1$3').replace(/(&|\?)$/, '');
-            if (typeof hash[1] !== 'undefined' && hash[1] !== null)
-                url += '#' + hash[1];
-            return url;
-        }
-    }
-    else {
-        if (typeof value !== 'undefined' && value !== null) {
-            var separator = url.indexOf('?') !== -1 ? '&' : '?';
-            hash = url.split('#');
-            url = hash[0] + separator + key + '=' + value;
-            if (typeof hash[1] !== 'undefined' && hash[1] !== null)
-                url += '#' + hash[1];
-            return url;
-        }
-        else
-            return url;
-    }
-}
-*/

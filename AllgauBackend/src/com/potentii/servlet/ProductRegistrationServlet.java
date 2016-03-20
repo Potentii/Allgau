@@ -15,31 +15,22 @@ import com.potentii.dao.DAO;
 import com.potentii.dao.ProductDAO;
 import com.potentii.model.Product;
 
-/**
- * Servlet implementation class ProductRegistrationServlet
- */
+
 @WebServlet("/productReg")
 public class ProductRegistrationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+    
     public ProductRegistrationServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ProductRegistrationResponse productRegistrationResponse = null;
 		
@@ -48,6 +39,7 @@ public class ProductRegistrationServlet extends HttpServlet {
 		Double price = Double.valueOf(request.getParameter("price"));
 		Integer quantity = Integer.valueOf(request.getParameter("quantity"));
 		
+		System.out.println("post request on /productReg\nlabel: " + label + "\ndescription: " + description + "\nprice: " + price + "\nquantity: " + quantity);
 		
 		if(label != null 
 				&& description != null
@@ -77,7 +69,6 @@ public class ProductRegistrationServlet extends HttpServlet {
 	}
 	
 	
-	
 	public class ProductRegistrationResponse{
 		public Product product;
 		public String error;
@@ -88,5 +79,4 @@ public class ProductRegistrationServlet extends HttpServlet {
 			this.error = error;
 		}		
 	}
-
 }

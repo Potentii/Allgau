@@ -6,6 +6,14 @@ var confirmBtn;
 var loginForm;
 var loginForm;
 
+
+
+
+$(document).ready(function(){
+   // *Updating login info on drawer:
+   updateDrawerUserInfo();
+});
+
 function loadLoginSection(){
    personImg   = $("#loginSection_personImg");
    welcomeOut  = $("#loginSection_welcomeOut");
@@ -19,10 +27,12 @@ function loadLoginSection(){
    fadeForm(true, 0);
    expandPersonImg(false, 0);
 
+   personImg.attr("src", default_person_img);
+
 
    // *Adding form's submit listener:
    loginForm.submit(function(event){
-      // *Preventing from page to reload on submit:
+      // *Preventing page to reload on submit:
       event.preventDefault();
 
       // *Sending the http request:
@@ -39,25 +49,60 @@ function loadLoginSection(){
          // *Verifying if the user got the authorization:
          if(responseJson.auth){
 
+            // *Updating user's info:
+            user_id = responseJson.login;
+            user_name = responseJson.name;
+            user_img = "../res/img/user.png";
+
+            // *Saving user's info:
+            if(saveUser_session){
+               sessionStorage.setItem("user_id", user_id);
+               sessionStorage.setItem("user_name", user_name);
+               sessionStorage.setItem("user_img", user_img);
+            }
+
+            // *Updating user's info on drawer:
+            updateDrawerUserInfo();
+
             // *Displaying the welcome message:
-            welcomeOut.text("Welcome, " + responseJson.name);
+            welcomeOut.text("Welcome, " + user_name);
             fadeForm(false, 400);
             fadeWelcomeMessage(true, 700);
             expandPersonImg(true, 700);
 
+            // *Exiting login section:
             window.setTimeout(function(){
+               goToHash("#profile");
             }, 3000);
 
-            // TODO exit the login section
          } else{
+            user_id = null;
+            user_name = null;
+            user_img = null;
             console.log("Login failed: " + responseJson.err);
+            updateDrawerUserInfo();
          }
 
       }).fail(function(jqXHR, textStatus, errorThrown){
+         user_id = null;
+         user_name = null;
+         user_img = null;
          console.log("Login failed: Can't reach server");
+         updateDrawerUserInfo();
       });
    });
+}
 
+
+function updateDrawerUserInfo(){
+   var name = user_id === null ? "Log in":user_name;
+   var img = user_id === null ? default_person_img:user_img;
+
+   // *Setting up user's name:
+   $('#drawerLoginBtn > span').text(name);
+
+   // *Setting up user's image:
+   $('#drawerLoginBtn > img').attr("src", img);
 }
 
 

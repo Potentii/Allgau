@@ -2,8 +2,6 @@ package com.potentii.servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,33 +16,33 @@ import com.potentii.dao.ProductDAO;
 import com.potentii.model.Product;
 
 
-@WebServlet("/productList")
-public class ProductListServlet extends HttpServlet {
+@WebServlet("/productView")
+public class ProductViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    
-    public ProductListServlet() {
+
+    public ProductViewServlet() {
         super();
     }
 
-	
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	
 	}
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<Product> entityList = new ArrayList<>();
+		Product entity = null;
+		Long id = Long.valueOf(request.getParameter("id"));
 		
-		System.out.println("post request on /productList");
+		System.out.println("post request on /productView\nid: " + id);
 		
 		
 		try {
 			DAO<Product> dao = new ProductDAO(new ConnectionFactory().getConnection());
-			entityList = dao.retrieveAll();
+			entity = dao.retrieve(id);
 			
 		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -53,7 +51,6 @@ public class ProductListServlet extends HttpServlet {
 	    response.setContentType("text/plain");
 	    response.setCharacterEncoding("UTF-8");
 	    
-	    response.getWriter().write(new Gson().toJson(entityList, ArrayList.class));
+	    response.getWriter().write(new Gson().toJson(entity, Product.class));
 	}
-
 }

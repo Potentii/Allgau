@@ -78,7 +78,6 @@ public class EmployeeDAO implements DAO<Employee> {
 	}
 	
 	
-	
 	public boolean authenticate(String login, String password) throws SQLException {
 		if(login == null || password == null){
 			return false;
@@ -96,7 +95,7 @@ public class EmployeeDAO implements DAO<Employee> {
 	}
 	
 	
-	public Employee getEmployeeByLogin(String login) throws SQLException{
+	public Employee retrieve_withLogin(String login) throws SQLException{
 		if(login == null){
 			return null;
 		}

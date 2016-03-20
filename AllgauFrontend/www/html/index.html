@@ -29,6 +29,7 @@
       <script src="../js/lib/jquery-2.2.0.min.js"></script>
       <script src="../js/navigation.js"></script>
       <script src="../js/login_section.js"></script>
+      <script src="../js/profile_section.js"></script>
       <script src="../js/storage_section.js"></script>
       <script src="../js/product_reg_section.js"></script>
       <script src="../js/product_view_section.js"></script>
@@ -60,9 +61,9 @@
       <div id="drawerAndSectionDiv">
          <nav id="drawer">
             <div id="drawerLoginDiv">
-               <button id="drawerLoginBtn" onclick="goToHash('#login')">
-                  <img class="circledImg" src="../res/img/user.png"/>
-                  <span>Guilherme Reginaldo</span>
+               <button id="drawerLoginBtn" onclick="goToHash('#profile')">
+                  <img class="circledImg"/>
+                  <span></span>
                   <paper-ripple fit/>
                </button>
             </div>
@@ -103,11 +104,17 @@
          <main id="mainContent">
 
 
+            <!-- * Default section * -->
+            <section id="default_section">
+
+            </section>
+
+
             <!-- * Login's section * -->
             <section id="login_section" class="formSection">
                <form method="post">
-                  <img id="loginSection_personImg" class="circledImg whiteBorder" src="../res/img/user.png"/>
-                  <span id="loginSection_welcomeOut">Welcome</span>
+                  <img id="loginSection_personImg" class="circledImg whiteBorder"/>
+                  <span id="loginSection_welcomeOut"></span>
                   <paper-input auto-validate id="loginSection_loginIn" label="Login name" error-message="Please inform your login" required></paper-input>
                   <paper-input auto-validate id="loginSection_passwordIn" type="password" label="Password" error-message="Please inform your password" required></paper-input>
                   <button type="submit" id="loginSection_confirmBtn" class="rippleBtn raised">
@@ -115,6 +122,25 @@
                      <paper-ripple fit/>
                   </button>
                </form>
+            </section>
+
+
+            <!-- * Profile's section * -->
+            <section id="profile_section" class="formSection">
+               <div class="detailContainer raised">
+                  <div class="detailContainerHeader">
+                     <img id="profileSection_personImg" class="circledImg"/>
+                     <span id="profileSection_personName"></span>
+                     <div class="right">
+                        <button class="blue" onclick="logOutBtn_onClick()">Log out</button>
+                     </div>
+                  </div>
+
+                  <div class="formRow">
+                     <i class="material-icons">account_circle</i>
+                     <span id="profileSection_loginOut"></span>
+                  </div>
+               </div>
             </section>
 
 
@@ -158,12 +184,42 @@
 
 
             <!-- * Product's view section * -->
+            <section id="productView_section" class="formSection">
+               <div class="detailContainer raised">
 
-            <section id="productView_section" class="listSection">
-               <button class="fab raised listFab" onclick="goToHash('#login')">
-                  <i class="material-icons">add</i>
-                  <paper-ripple fit/>
-               </button>
+                  <div class="detailContainerHeader">
+                     <img id="productViewSection_img" class="circledImg"/>
+                     <span id="productViewSection_labelOut"></span>
+                     <div class="right">
+                        <button class="material-icons red">close</button>
+                     </div>
+                  </div>
+
+                  <div class="formRow">
+                     <i class="material-icons">more</i>
+                     <span id="productViewSection_idOut"></span>
+                  </div>
+
+                  <div class="formRow">
+                     <i class="material-icons">description</i>
+                     <span id="productViewSection_descriptionOut"></span>
+                  </div>
+
+                  <div class="formRow">
+                     <i class="material-icons">attach_money</i>
+                     <span id="productViewSection_priceOut"></span>
+                  </div>
+
+                  <div class="formRow">
+                     <i class="material-icons">drafts</i>
+                     <span id="productViewSection_quantityOut"></span>
+                  </div>
+
+                  <div class="formRow">
+                     <i class="material-icons">today</i>
+                     <span id="productViewSection_dateOut"></span>
+                  </div>
+               </div>
             </section>
 
          </main>

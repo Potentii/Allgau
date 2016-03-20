@@ -15,72 +15,57 @@ import com.potentii.dao.EmployeeDAO;
 import com.potentii.model.Employee;
 
 
-
-@WebServlet("/login")
-public class LoginServlet extends HttpServlet {
+@WebServlet("/profile")
+public class ProfileServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-
-    public LoginServlet() {
+    
+    public ProfileServlet() {
         super();
     }
 
-    
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 	}
 
-
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		LoginResponse loginResponse = null;
+		ProfileResponse profileResponse = null;
+		String login = request.getParameter("login");
 		
-		String login = (String) request.getParameter("login");
-		String password = (String) request.getParameter("password");
-		
-		System.out.println("post request on /login\nlogin: " + login + "\npassword: " + password);
-		
+		System.out.println("post request on /profile\nlogin: " + login);
 		
 		try {
-			EmployeeDAO employeeDAO = new EmployeeDAO(new ConnectionFactory().getConnection());
+			EmployeeDAO dao = new EmployeeDAO(new ConnectionFactory().getConnection());
+			Employee employee = dao.retrieve_withLogin(login);
 			
-			if(employeeDAO.authenticate(login, password)){
-				Employee employee = employeeDAO.retrieve_withLogin(login);
-				
-				loginResponse = new LoginResponse(employee.getName(), employee.getLogin());
-			} else{
-				loginResponse = new LoginResponse("Incorrect user or password");
-			}
+			profileResponse = new ProfileResponse(employee.getName(), "", employee.getLogin());
+			
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
-			loginResponse = new LoginResponse(e.getMessage());
 		}
-		
 		
 		response.addHeader("Access-Control-Allow-Origin", "*");
 	    response.setContentType("text/plain");
 	    response.setCharacterEncoding("UTF-8");
-	    response.getWriter().write(new Gson().toJson(loginResponse, LoginResponse.class));
+	    
+	    response.getWriter().write(new Gson().toJson(profileResponse, ProfileResponse.class));
+	
 	}
-
 	
 	
-	public class LoginResponse{
-		public boolean auth;
+	public class ProfileResponse{
 		public String name;
+		public String img;
 		public String login;
-		public String err;
 		
-		public LoginResponse(String name, String login) {
+		public ProfileResponse(String name, String img, String login) {
 			super();
-			this.auth = true;
 			this.name = name;
+			this.img = img;
 			this.login = login;
 		}
-		
-		public LoginResponse(String err) {
-			super();
-			this.auth = false;
-			this.err = err;
-		}
 	}
+
 }
