@@ -9,7 +9,7 @@ function loadProfileSection(){
       method: "POST",
       url: "http://" + SERVER_ADDRESS + ":" + SERVER_PORT + "/" + SERVER_APPLICATION +
          "/profile",
-      data: {login: user_id}
+      data: {login: user.login}
    }).done(function(responseJson_str){
 
       // *Converting the response string to JSON:
@@ -26,13 +26,8 @@ function loadProfileSection(){
 
 
 function logOutBtn_onClick(){
-   sessionStorage.removeItem("user_id");
-   sessionStorage.removeItem("user_name");
-   sessionStorage.removeItem("user_img");
+   sessionStorage.removeItem(USER_STORAGE_KEY);
+   localStorage.removeItem(USER_STORAGE_KEY);
 
-   user_id     = null;
-   user_name   = null;
-   user_img    = null;
-
-   goToHash("#login");
+   gotoPage(LOGIN_PAGE_CODE);
 }

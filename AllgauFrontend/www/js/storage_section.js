@@ -1,7 +1,10 @@
 var list;
 
+var inSelectionMode;
+
 function loadStorageSection(){
    list = $("#storage_sectionList");
+   inSelectionMode = false;
 
 
    // *Sending the http request:
@@ -33,16 +36,24 @@ function loadStorageSection(){
       }
 
 
-      $("#storage_sectionList .row").click(function(){
+      $("#storage_sectionList .row")
+      .click(function(){
+         // *On click an item:
          var id = $(this).attr("data-id");
          goToHash("#productView", "?productId=" + id);
+      })
+      .bind("taphold", function(e){
+         // *On long-click an item:
+         enableSelectionMode(true);
+         alert("long-click: " + $(this).attr('data-id'));
       });
 
    }).fail(function(jqXHR, textStatus, errorThrown){
       console.log("Loading failed: Can't reach server");
    });
+}
 
-
-
-
+function enableSelectionMode(enable){
+   inSelectionMode = enable;
+   
 }

@@ -1,0 +1,13 @@
+#login_personImg{
+	width: 4em;
+	height: 4em;
+}
+#login_welcomeDiv{
+   position: absolute;
+   width: 100%;
+   z-index: 1;
+}
+#login_welcomeOut{
+   text-align: center;
+   color: #424242;
+}

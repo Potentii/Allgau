@@ -238,6 +238,7 @@ button:hover, a:hover{
 	position: relative;
 	height: 3em;
 	width: 3em;
+	min-width: 3em;
 }
 .detailContainerHeader > span{
 	display: inline-block;
@@ -245,6 +246,7 @@ button:hover, a:hover{
 	margin: auto 0 auto 1em;
 	font-size: 1.1em;
 }
+
 .detailContainerHeader > .right{
 	display: inline-block;
 	position: relative;
@@ -256,6 +258,7 @@ button:hover, a:hover{
 	position: relative;
 	font-size: 1.1em;
 	float: right;
+	color: #212121;
 	transition: color 0.15s ease;
 }
 .detailContainerHeader > .right > .blue:hover, .detailContainerHeader > .right > .blue:active{
@@ -264,6 +267,10 @@ button:hover, a:hover{
 .detailContainerHeader > .right > .red:hover, .detailContainerHeader > .right > .red:active{
 	color: #d34;
 }
+.detailContainerHeader > .right > .material-icons{
+	font-size: 1.5em;
+}
+
 .detailContainer > .formRow{
 	margin-left: 1em;
 	margin-right: 1em;

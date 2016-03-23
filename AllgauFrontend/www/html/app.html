@@ -25,10 +25,12 @@
       <link rel="import" href="../css/polymer.html">
       <style is="custom-style" include="polymer"></style>
       -->
+      <script src="../js/lib/jquery/external/jquery/jquery.js"></script>
+      <script src="../js/lib/jquery/jquery-ui.min.js"></script>
+      <script src="../js/lib/jquery/jquery-mobile.min.js"></script>
 
-      <script src="../js/lib/jquery-2.2.0.min.js"></script>
+      <script src="../js/global.js"></script>
       <script src="../js/navigation.js"></script>
-      <script src="../js/login_section.js"></script>
       <script src="../js/profile_section.js"></script>
       <script src="../js/storage_section.js"></script>
       <script src="../js/product_reg_section.js"></script>
@@ -110,21 +112,6 @@
             </section>
 
 
-            <!-- * Login's section * -->
-            <section id="login_section" class="formSection">
-               <form method="post">
-                  <img id="loginSection_personImg" class="circledImg whiteBorder"/>
-                  <span id="loginSection_welcomeOut"></span>
-                  <paper-input auto-validate id="loginSection_loginIn" label="Login name" error-message="Please inform your login" required></paper-input>
-                  <paper-input auto-validate id="loginSection_passwordIn" type="password" label="Password" error-message="Please inform your password" required></paper-input>
-                  <button type="submit" id="loginSection_confirmBtn" class="rippleBtn raised">
-                     LOGIN
-                     <paper-ripple fit/>
-                  </button>
-               </form>
-            </section>
-
-
             <!-- * Profile's section * -->
             <section id="profile_section" class="formSection">
                <div class="detailContainer raised">
@@ -191,7 +178,7 @@
                      <img id="productViewSection_img" class="circledImg"/>
                      <span id="productViewSection_labelOut"></span>
                      <div class="right">
-                        <button class="material-icons red">close</button>
+                        <button class="material-icons red" onclick="productViewSection_deleteBtn_onClick()">delete</button>
                      </div>
                   </div>
 

@@ -7,7 +7,7 @@
     <author email="potentii@gmailcom" href="https://github.com/Potentii">
         Guilherme Reginaldo Ruella
     </author>
-    <content src="html/index.html" />
+    <content src="html/splash.html" />
     <plugin name="cordova-plugin-whitelist" spec="1" />
     <access origin="*" />
     <allow-intent href="http://*/*" />

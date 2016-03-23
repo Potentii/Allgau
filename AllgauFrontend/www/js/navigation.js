@@ -1,19 +1,6 @@
-
-var SERVER_ADDRESS = "192.168.1.31";
-var SERVER_PORT = "9090";
-var SERVER_APPLICATION = "AllgauBackend";
-
-var saveUser_session = true;
-
-var user_id = null;
-var user_name = null;
-var user_img = null;
-
-var default_person_img = "../res/img/default_person.png";
-var default_book_img = "../res/img/default_book.png";
+var user = null;
 
 var DEFAULT_SECTION;
-var LOGIN_SECTION;
 var PROFILE_SECTION;
 var STORAGE_SECTION;
 var PRODUCT_REG_SECTION;
@@ -28,6 +15,18 @@ var drawerOpened = true;
 
 
 $(document).ready(function(){
+   // *Retrieving user's info:
+   user = JSON.parse(sessionStorage.getItem(USER_STORAGE_KEY));
+
+   // *Only allows logged users:
+   if(user === null){
+      gotoPage(SPLASH_PAGE_CODE);
+   }
+
+   // *Updating user's info on navigation drawer:
+   updateDrawerUserInfo(user);
+
+
    // *Fixing a bug with mobile webviews and :active state:
    document.addEventListener("touchstart", function(){}, true);
 
@@ -37,7 +36,6 @@ $(document).ready(function(){
 
 
    DEFAULT_SECTION      = $("#default_section");
-   LOGIN_SECTION        = $("#login_section");
    PROFILE_SECTION      = $("#profile_section");
    STORAGE_SECTION      = $("#storage_section");
    PRODUCT_REG_SECTION  = $("#productReg_section");
@@ -46,7 +44,6 @@ $(document).ready(function(){
 
    sectionArray = [
       DEFAULT_SECTION,
-      LOGIN_SECTION,
       PROFILE_SECTION,
       STORAGE_SECTION,
       PRODUCT_REG_SECTION,
@@ -54,17 +51,6 @@ $(document).ready(function(){
    ];
 
 
-   // *If not supposed to save user's info, erase it:
-   if(!saveUser_session){
-      sessionStorage.removeItem("user_id");
-      sessionStorage.removeItem("user_name");
-      sessionStorage.removeItem("user_img");
-   }
-
-   // *Retrieving login info from session:
-   user_id     = sessionStorage.getItem("user_id");
-   user_name   = sessionStorage.getItem("user_name");
-   user_img    = sessionStorage.getItem("user_img");
 
 
    // *Loading the current requested hash:
@@ -103,18 +89,7 @@ function goToHash(hash, queryString){
 }
 
 function resolveHash(hash){
-   // *Only allows not logged users to access login section:
-   if(hash !== "#login" && user_id===null){
-      goToHash("#login");
-      return;
-   }
-
    switch(hash){
-   case '#login':
-      currentSection = LOGIN_SECTION;
-      focusOnCurrentSection();
-      loadLoginSection();
-      break;
    case '#profile':
       currentSection = PROFILE_SECTION;
       focusOnCurrentSection();
@@ -197,6 +172,18 @@ function closeDrawer(){
       drawerOpened = false;
    }
 }
+
+/**
+* Updates the user info on navigation drawer.
+*/
+function updateDrawerUserInfo(user){
+   // *Setting up user's image:
+   $('#drawerLoginBtn > img').attr("src", user.img);
+
+   // *Setting up user's name:
+   $('#drawerLoginBtn > span').text(user.userName);
+}
+
 
 
 /**

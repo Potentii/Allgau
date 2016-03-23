@@ -4,30 +4,24 @@ var loginIn;
 var passwordIn;
 var confirmBtn;
 var loginForm;
-var loginForm;
-
-
 
 
 $(document).ready(function(){
-   // *Updating login info on drawer:
-   updateDrawerUserInfo();
-});
-
-function loadLoginSection(){
-   personImg   = $("#loginSection_personImg");
-   welcomeOut  = $("#loginSection_welcomeOut");
-   loginIn     = $("#loginSection_loginIn");
-   passwordIn  = $("#loginSection_passwordIn");
-   confirmBtn  = $("#loginSection_confirmBtn");
+   personImg   = $("#login_personImg");
+   welcomeOut  = $("#login_welcomeOut");
+   loginIn     = $("#login_loginIn");
+   passwordIn  = $("#login_passwordIn");
+   confirmBtn  = $("#login_confirmBtn");
    loginForm   = $("#login_section > form");
+
+
+   // *Fixing a bug with mobile webviews and :active state:
+   document.addEventListener("touchstart", function(){}, true);
 
 
    fadeWelcomeMessage(false, 0);
    fadeForm(true, 0);
-   expandPersonImg(false, 0);
-
-   personImg.attr("src", default_person_img);
+   expandUserImg(false, 0);
 
 
    // *Adding form's submit listener:
@@ -49,63 +43,51 @@ function loadLoginSection(){
          // *Verifying if the user got the authorization:
          if(responseJson.auth){
 
-            // *Updating user's info:
-            user_id = responseJson.login;
-            user_name = responseJson.name;
-            user_img = "../res/img/user.png";
+
+            // *Creating an User instance:
+            var user = new User(
+               responseJson.name,
+               responseJson.login,
+               "../res/img/user.png"
+            );
+
 
             // *Saving user's info:
-            if(saveUser_session){
-               sessionStorage.setItem("user_id", user_id);
-               sessionStorage.setItem("user_name", user_name);
-               sessionStorage.setItem("user_img", user_img);
+            if(enableSavingUser){
+               localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(user));
             }
+            sessionStorage.setItem(USER_STORAGE_KEY, JSON.stringify(user));
 
-            // *Updating user's info on drawer:
-            updateDrawerUserInfo();
 
             // *Displaying the welcome message:
-            welcomeOut.text("Welcome, " + user_name);
+            personImg.attr("src", user.img);
+            welcomeOut.text("Welcome, " + user.userName);
             fadeForm(false, 400);
             fadeWelcomeMessage(true, 700);
-            expandPersonImg(true, 700);
+            expandUserImg(true, 700);
+
 
             // *Exiting login section:
             window.setTimeout(function(){
-               goToHash("#profile");
+               gotoPage(APP_PAGE_CODE);
             }, 3000);
 
          } else{
-            user_id = null;
-            user_name = null;
-            user_img = null;
+            localStorage.removeItem(USER_STORAGE_KEY);
             console.log("Login failed: " + responseJson.err);
-            updateDrawerUserInfo();
+            alert("Login failed: " + responseJson.err);
          }
 
       }).fail(function(jqXHR, textStatus, errorThrown){
-         user_id = null;
-         user_name = null;
-         user_img = null;
          console.log("Login failed: Can't reach server");
-         updateDrawerUserInfo();
+         alert("Login failed: Can't reach server");
       });
    });
-}
+});
 
-
-function updateDrawerUserInfo(){
-   var name = user_id === null ? "Log in":user_name;
-   var img = user_id === null ? default_person_img:user_img;
-
-   // *Setting up user's name:
-   $('#drawerLoginBtn > span').text(name);
-
-   // *Setting up user's image:
-   $('#drawerLoginBtn > img').attr("src", img);
-}
-
-
+/**
+ * Hides or shows the form's inputs.
+ */
 function fadeForm(fadeIn, time){
    if(fadeIn){
       loginIn.fadeIn(time);
@@ -118,6 +100,9 @@ function fadeForm(fadeIn, time){
    }
 }
 
+/**
+ * Hides or shows the welcome message.
+ */
 function fadeWelcomeMessage(fadeIn, time){
    if(fadeIn){
       welcomeOut.animate({fontSize:'2em', opacity:'1'}, time);
@@ -126,7 +111,10 @@ function fadeWelcomeMessage(fadeIn, time){
    }
 }
 
-function expandPersonImg(expand, time){
+/**
+ * Expands or contracts the user image.
+ */
+function expandUserImg(expand, time){
    if(expand){
       personImg.animate({width: '5em', height: '5em'}, time);
    } else{

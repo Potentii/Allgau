@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en-us">
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width" />
+
+      <link rel="icon" href="../res/img/allgau_logo_icon_16.png" sizes="16x16"/>
+
+      <link rel="stylesheet" href="../css/lib/material_icons.css">
+      <link rel="stylesheet" href="../css/common.css">
+      <link rel="stylesheet" href="../css/login.css">
+
+      <link rel="import" href="https://www.polymer-project.org/0.5/components/paper-ripple/paper-ripple.html">
+      <link rel="import" href="https://www.polymer-project.org/0.5/components/paper-input/paper-input.html">
+
+      <script src="../js/lib/jquery/external/jquery/jquery.js"></script>
+      <script src="../js/global.js"></script>
+      <script src="../js/login.js"></script>
+
+      <title>Allgäu</title>
+   </head>
+   <body>
+      <section id="login_section" class="formSection">
+         <form method="post">
+            <img id="login_personImg" class="circledImg whiteBorder" src="../res/img/default_person.png"/>
+            <span id="login_welcomeOut"></span>
+            <paper-input auto-validate id="login_loginIn" label="Login name" error-message="Please inform your login" required></paper-input>
+            <paper-input auto-validate id="login_passwordIn" type="password" label="Password" error-message="Please inform your password" required></paper-input>
+            <button type="submit" id="login_confirmBtn" class="rippleBtn raised">
+               LOGIN
+               <paper-ripple fit/>
+            </button>
+         </form>
+      </section>
+   </body>
+</html>

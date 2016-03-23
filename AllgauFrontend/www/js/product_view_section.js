@@ -1,6 +1,3 @@
-
-
-
 function loadProductViewSection(){
    var img              = $("#productViewSection_img");
    var idOut            = $("#productViewSection_idOut");
@@ -22,7 +19,7 @@ function loadProductViewSection(){
       // *Converting the response string to JSON:
       product = JSON.parse(responseJson_str);
 
-      img.attr("src", default_book_img);
+      img.attr("src", DEFAULT_BOOK_IMG);
       idOut.text("#" + product.id);
       labelOut.text(product.label);
       descriptionOut.text(product.description);
@@ -38,4 +35,8 @@ function loadProductViewSection(){
 
 function getId(){
    return getQueryString("productId");
+}
+
+function productViewSection_deleteBtn_onClick(){
+   // TODO
 }
