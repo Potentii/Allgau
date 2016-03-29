@@ -30,9 +30,11 @@
       <script src="../js/lib/jquery/jquery-mobile.min.js"></script>
 
       <script src="../js/global.js"></script>
+      <script src="../js/stub.js"></script>
       <script src="../js/navigation.js"></script>
       <script src="../js/profile_section.js"></script>
       <script src="../js/storage_section.js"></script>
+      <script src="../js/cart_section.js"></script>
       <script src="../js/product_reg_section.js"></script>
       <script src="../js/product_view_section.js"></script>
 
@@ -52,6 +54,11 @@
          </div>
 
          <div id="appBarActionDiv">
+            <button id="cartBtn" class="rippleBtn">
+               <i class="material-icons">shopping_cart</i>
+               <paper-ripple fit/>
+            </button>
+
             <button id="moreBtn" class="rippleBtn">
                <i class="material-icons">more_vert</i>
                <paper-ripple fit/>
@@ -134,11 +141,49 @@
             <!-- * Storage's section * -->
             <section id="storage_section" class="listSection">
                <ul id="storage_sectionList">
+                  <!--
+                  <li class="row" data-id="1">
+                     <div class="horizontal">
+                        <span class="vertical title">Title bacana<i class="material-icons">drafts</i><span class="quantityInStockOut">47</span></span>
+                        <span class="vertical">Description bem legal hein</span>
+                     </div>
+
+                     <div class="horizontal cartQuantityContainer">
+                        <span class="cartQuantityOut">
+                           4
+                        </span>
+                     </div>
+                     <paper-ripple fit/>
+                  </li>
+               -->
                </ul>
                <button class="fab raised listFab" onclick="goToHash('#productReg')">
+                  <!-- TODO fix it -->
                   <i class="material-icons">add</i>
                   <paper-ripple fit/>
                </button>
+            </section>
+
+
+            <!-- * Product's view section * -->
+            <section id="cart_section" class="formSection">
+               <div class="detailContainer raised">
+
+                  <div class="detailContainerHeader">
+
+                     <img id="cartSection_img" class="circledImg"/>
+                     <span id="cartSection_labelOut"></span>
+                     <div class="right">
+                        <button class="material-icons red" onclick="cartSection_deleteBtn_onClick()">delete</button>
+                     </div>
+
+                  </div>
+                  <!--
+                  <div class="formRow">
+                     <i class="material-icons">more</i>
+                     <span id="productViewSection_idOut"></span>
+                  </div>-->
+               </div>
             </section>
 
 

@@ -68,7 +68,7 @@ header > *{
 header .rippleBtn{
 	position: relative;
 	display: inline-block;
-	padding: 1em;
+	padding: 0.99em;
 	border-radius: 50%;
 	color: #F5F5F5;
 }
@@ -246,4 +246,58 @@ header .rippleBtn > paper-ripple{
 	padding-top: 4.5em;
 
 	background: #F5F5F5;
+}
+
+
+
+
+
+
+
+#storage_sectionList{
+}
+
+#storage_sectionList .productImgContainer{
+	flex-grow: 0;
+	margin-right: 1em;
+}
+#storage_sectionList .productImgContainer > .circledImg{
+	width: 3em;
+	height: 3em;
+}
+
+#storage_sectionList .title > *{
+	color: #888;
+}
+#storage_sectionList .title > .material-icons{
+	margin-left: 1.5em;
+	font-size: 0.6em;
+}
+#storage_sectionList .title > .quantityInStockOut{
+	margin-left: 0.5em;
+	font-size: 0.9em;
+}
+
+
+#storage_sectionList .cartQuantityContainer{
+	margin-left: 2em;
+	display: none;
+}
+#storage_sectionList .cartQuantityOut{
+	float: right;
+	position: relative;
+	display: table-cell;
+	background: #E65100;
+	border-radius: 50%;
+	min-height: 2.5em;
+	min-width: 2.5em;
+	height: 2.5em;
+	width: 2.5em;
+	padding: 0.5em;
+	overflow: hidden;
+
+	text-align: center;
+	vertical-align: middle;
+	font-size: 1em;
+	color: #F5F5F5;
 }

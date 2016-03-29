@@ -200,20 +200,37 @@ button:hover, a:hover{
 	top: 0px;
 	bottom:0px;
 	height: 100%;
+	padding-bottom: 6.5em;
 }
+
 .listSection .row{
-	display: block;
+	display: flex;
 	position: relative;
 	border-bottom: 1px solid rgba(0, 0, 0, 0.08);
 	list-style-type: none;
 	padding: 1em;
-	transition: background 0.2s ease;
+
 	cursor: pointer;
 	overflow: hidden;
+
+	flex-direction: row;
+	align-items: center;
+
+	transition: background 0.2s ease;
 }
 .listSection .row:hover{
    background: rgba(0, 0, 0, 0.08);
 	transition: background 0.1s ease;
+}
+
+.listSection .horizontal{
+	display: inline-block;
+	height: 100%;
+	flex-grow: 1;
+}
+.listSection .vertical{
+	display: block;
+	width: 100%;
 }
 
 

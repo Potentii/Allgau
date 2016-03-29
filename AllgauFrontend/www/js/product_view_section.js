@@ -9,27 +9,23 @@ function loadProductViewSection(){
 
 
    // *Sending the http request:
-   $.ajax({
-      method: "POST",
-      url: "http://" + SERVER_ADDRESS + ":" + SERVER_PORT + "/" + SERVER_APPLICATION +
-         "/productView",
-      data: {id: getId()}
-   }).done(function(responseJson_str){
-
-      // *Converting the response string to JSON:
-      product = JSON.parse(responseJson_str);
-
-      img.attr("src", DEFAULT_BOOK_IMG);
-      idOut.text("#" + product.id);
-      labelOut.text(product.label);
-      descriptionOut.text(product.description);
-      priceOut.text(product.price + " USD");
-      quantityOut.text(product.quantity);
-      dateOut.text(product.date);
-
-   }).fail(function(jqXHR, textStatus, errorThrown){
-      console.log("Loading failed: Can't reach server");
-   });
+   new AllgauRequest(
+      "productView",
+      "POST",
+      {id: getId()},
+      stub_productViewSection_loadProduct(getId())) //TODO STUB
+      .done(function(product){
+         img.attr("src", DEFAULT_BOOK_IMG);
+         idOut.text("#" + product.id);
+         labelOut.text(product.label);
+         descriptionOut.text(product.description);
+         priceOut.text(product.price + " USD");
+         quantityOut.text(product.quantity);
+         dateOut.text(product.date);
+      })
+      .fail(function(jqXHR, textStatus, errorThrown){
+         console.log("Loading failed: Can't reach server");
+      });
 }
 
 

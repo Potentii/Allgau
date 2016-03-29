@@ -3,6 +3,7 @@ var user = null;
 var DEFAULT_SECTION;
 var PROFILE_SECTION;
 var STORAGE_SECTION;
+var CART_SECTION;
 var PRODUCT_REG_SECTION;
 var PRODUCT_VIEW_SECTION;
 
@@ -38,6 +39,7 @@ $(document).ready(function(){
    DEFAULT_SECTION      = $("#default_section");
    PROFILE_SECTION      = $("#profile_section");
    STORAGE_SECTION      = $("#storage_section");
+   CART_SECTION         = $("#cart_section");
    PRODUCT_REG_SECTION  = $("#productReg_section");
    PRODUCT_VIEW_SECTION = $("#productView_section");
 
@@ -46,6 +48,7 @@ $(document).ready(function(){
       DEFAULT_SECTION,
       PROFILE_SECTION,
       STORAGE_SECTION,
+      CART_SECTION,
       PRODUCT_REG_SECTION,
       PRODUCT_VIEW_SECTION
    ];
@@ -99,6 +102,11 @@ function resolveHash(hash){
       currentSection = STORAGE_SECTION;
       focusOnCurrentSection();
       loadStorageSection();
+      break;
+   case '#cart':
+      currentSection = CART_SECTION;
+      focusOnCurrentSection();
+      loadCartSection();
       break;
    case '#productReg':
       currentSection = PRODUCT_REG_SECTION;
