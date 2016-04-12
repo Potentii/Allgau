@@ -97,24 +97,38 @@ button:hover, a:hover{
 	border-radius: 2px;
 	overflow: hidden;
 }
-.raised, .raised{
+
+
+
+.raised{
 	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
 	transition-delay: 0.2s;
 	transition: box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
-
-.rippleBtn.raised:active, .fab.raised:active {
+.raised:active {
 	box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2);
 	transition-delay: 0s;
 }
 
 
+
+.fabList{
+	position: fixed;
+	right: 2em;
+	bottom: 2em;
+}
 .fab{
+	display: block;
+	position: relative;
 	overflow: hidden;
 	padding: 1em;
 	border-radius: 50%;
 	background-color: #FFC107;
 	color: #fff;
+}
+.fabList > .fab:not(:last-child){
+	padding: 0.6em;
+	margin: 0 auto 1em auto;
 }
 .fab .material-icons{
 	display: block;
@@ -123,11 +137,9 @@ button:hover, a:hover{
 	vertical-align: middle;
 }
 
-.listFab{
-	position: fixed;
-	right: 2em;
-	bottom: 2em;
-}
+
+
+
 
 
 
@@ -145,7 +157,7 @@ button:hover, a:hover{
 	height: 100%;
 	overflow-y: auto;
 }
-.formSection > form, .formSection > div{
+.formSection > form, .formSection > div:not(.fabList){
 	display: flex;
 	flex-flow: column;
 	min-width: 18em;
@@ -153,7 +165,7 @@ button:hover, a:hover{
 	margin: 2em auto;
 	padding-bottom: 3em;
 }
-.formSection > form > *:not(.detailContainerHeader), .formSection > div > *:not(.detailContainerHeader){
+.formSection > form > *:not(.detailContainerHeader), .formSection > div:not(.fabList) > *:not(.detailContainerHeader){
 	position: relative;
 	margin: 0.5em auto;
 	width: 100%;

@@ -2,37 +2,48 @@
 var cart;
 
 function loadCartSection(){
+   var list = $("#cartSection_productList");
+   list.empty();
 
+   // *Retrieving the cart object from storage:
    cart = Cart.deserialize(sessionStorage.getItem(CART_STORAGE_CODE));
 
+   // *Getting the cart's ids for its products:
    var idQuantityArray = cart.idQuantityArray;
    var idArray = [];
    for(var i=0; i<idQuantityArray.length; i++){
       idArray.push(idQuantityArray[i].id);
    }
-   console.log(idArray);
+
 
    // *Sending the http request:
-   $.ajax({
-      method: "POST",
-      url: "http://" + SERVER_ADDRESS + ":" + SERVER_PORT + "/" + SERVER_APPLICATION +
-         "/cartView",
-      dataType: "json",
-      data: {idArray: JSON.stringify(idArray)}
-   }).done(function(responseJson){
+   new AllgauRequest(
+      "cartView",
+      "POST",
+      {idArray: JSON.stringify(idArray)},
+      stub_storageSection_loadProducts(6)) //TODO STUB
+      .done(function(response){
+         // *Returned the products info:
 
+         for(var i=0; i<response.length; i++){
+            var product = response[i];
 
-      for(var i=0; i<responseJson.length; i++){
-         var product = responseJson[i];
-         console.log("Response[" + i + "]: " + product.label);
-         // TODO
-      }
+            var itemList = getProductListItem(product);
+            var container = itemList.children(".cartQuantityContainer");
+            container.show();
+            for(var j=0; j<idQuantityArray.length; j++){
+               if(product.id == idQuantityArray[j].id){
+                  container.children(".cartQuantityOut").text(idQuantityArray[j].quantity);
+                  break;
+               }
+            }
 
-
-
-   }).fail(function(jqXHR, textStatus, errorThrown){
-      console.log("Loading failed: Can't reach server");
-   });
+            itemList.appendTo(list);
+         }
+      })
+      .fail(function(jqXHR, textStatus, errorThrown){
+         console.log("Loading failed: Can't reach server");
+      });
 }
 
 

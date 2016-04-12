@@ -257,33 +257,33 @@ header .rippleBtn > paper-ripple{
 #storage_sectionList{
 }
 
-#storage_sectionList .productImgContainer{
+.productList .productImgContainer{
 	flex-grow: 0;
 	margin-right: 1em;
 }
-#storage_sectionList .productImgContainer > .circledImg{
+.productList .productImgContainer > .circledImg{
 	width: 3em;
 	height: 3em;
 }
 
-#storage_sectionList .title > *{
+.productList .title > *{
 	color: #888;
 }
-#storage_sectionList .title > .material-icons{
+.productList .title > .material-icons{
 	margin-left: 1.5em;
 	font-size: 0.6em;
 }
-#storage_sectionList .title > .quantityInStockOut{
+.productList .title > .quantityInStockOut{
 	margin-left: 0.5em;
 	font-size: 0.9em;
 }
 
 
-#storage_sectionList .cartQuantityContainer{
+.productList .cartQuantityContainer{
 	margin-left: 2em;
 	display: none;
 }
-#storage_sectionList .cartQuantityOut{
+.productList .cartQuantityOut{
 	float: right;
 	position: relative;
 	display: table-cell;
@@ -300,4 +300,9 @@ header .rippleBtn > paper-ripple{
 	vertical-align: middle;
 	font-size: 1em;
 	color: #F5F5F5;
+}
+
+
+#cartSection_img{
+	display: none;
 }

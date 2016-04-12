@@ -1,6 +1,4 @@
 
-var list;
-
 var inSelectionMode;
 var cartBtn;
 var CART_STORAGE_CODE = "cart";
@@ -77,11 +75,81 @@ Cart.deserialize = function(idQuantityArray_str){
 
 
 
+/**
+ * Retrieves a DOM <li> element that represents the given product.
+ */
+function getProductListItem(product){
+   var listItem =
+   $("<li/>")
+         .addClass("row")
+         .attr("data-id", product.id);
+
+      var image_column =
+      $("<div/>")
+         .addClass("productImgContainer")
+         .addClass("horizontal")
+         .appendTo(listItem);
+
+         $("<img/>")
+            .addClass("circledImg")
+            .attr("src", DEFAULT_BOOK_IMG)
+            .appendTo(image_column);
+
+
+      var info_column =
+      $("<div/>")
+         .addClass("horizontal")
+         .appendTo(listItem);
+
+         var title_line =
+         $("<span/>")
+            .addClass("vertical")
+            .addClass("title")
+            .text(product.label)
+            .appendTo(info_column);
+
+            $("<i/>")
+               .addClass("material-icons")
+               .text("drafts")
+               .appendTo(title_line);
+
+            $("<span/>")
+               .addClass("quantityInStockOut")
+               .text(product.quantity)
+               .appendTo(title_line);
+
+         $("<span/>")
+            .addClass("vertical")
+            .text(product.description)
+            .appendTo(info_column);
+
+      var cart_column =
+      $("<div/>")
+         .addClass("horizontal")
+         .addClass("cartQuantityContainer")
+         .appendTo(listItem);
+
+         $("<span/>")
+            .addClass("cartQuantityOut")
+            .appendTo(cart_column);
+
+
+      $("<paper-ripple/>")
+         .attr("fit", true)
+         .appendTo(listItem);
+
+   return listItem;
+}
+
+
+
+
 function loadStorageSection(){
    $.event.special.tap.emitTapOnTaphold = false;
 
    cartBtn = $("#cartBtn");
-   list = $("#storage_sectionList");
+   var list = $("#storage_sectionList");
+   list.empty();
    enableSelectionMode(false);
 
    cartBtn
@@ -134,65 +202,8 @@ function loadStorageSection(){
          for(var i=0; i<response.length; i++){
             var product = response[i];
 
-            var listItem =
-            $("<li/>")
-                  .addClass("row")
-                  .attr("data-id", product.id)
-                  .appendTo(list);
-
-               var image_column =
-               $("<div/>")
-                  .addClass("productImgContainer")
-                  .addClass("horizontal")
-                  .appendTo(listItem);
-
-                  $("<img/>")
-                     .addClass("circledImg")
-                     .attr("src", DEFAULT_BOOK_IMG)
-                     .appendTo(image_column);
-
-
-               var info_column =
-               $("<div/>")
-                  .addClass("horizontal")
-                  .appendTo(listItem);
-
-                  var title_line =
-                  $("<span/>")
-                     .addClass("vertical")
-                     .addClass("title")
-                     .text(product.label)
-                     .appendTo(info_column);
-
-                     $("<i/>")
-                        .addClass("material-icons")
-                        .text("drafts")
-                        .appendTo(title_line);
-
-                     $("<span/>")
-                        .addClass("quantityInStockOut")
-                        .text(product.quantity)
-                        .appendTo(title_line);
-
-                  $("<span/>")
-                     .addClass("vertical")
-                     .text(product.description)
-                     .appendTo(info_column);
-
-               var cart_column =
-               $("<div/>")
-                  .addClass("horizontal")
-                  .addClass("cartQuantityContainer")
-                  .appendTo(listItem);
-
-                  $("<span/>")
-                     .addClass("cartQuantityOut")
-                     .appendTo(cart_column);
-
-
-               $("<paper-ripple/>")
-                  .attr("fit", true)
-                  .appendTo(listItem);
+            var itemList = getProductListItem(product);
+            itemList.appendTo(list);
          }
 
          loadCart();
@@ -211,7 +222,7 @@ function loadStorageSection(){
 
 function enableSelectionMode(enable){
    inSelectionMode = enable;
-   list.css("background", enable?"rgba(0, 0, 0, 0.15)":"none");
+   $("#storage_sectionList").css("background", enable?"rgba(0, 0, 0, 0.15)":"none");
    console.log("Selection mode: " + enable);
 }
 

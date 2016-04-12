@@ -13,18 +13,22 @@
       <link rel="stylesheet" href="../css/login_section.css">
       <link rel="stylesheet" href="../css/storage_section.css">
 
+      <!-- Uncomment on production -->
       <!--
       <link rel="import" href="../bower_components/paper-ripple/paper-ripple.html">
       <link rel="import" href="../bower_components/paper-input/paper-input.html">
       -->
 
+      <!-- Comment on production -->
       <link rel="import" href="https://www.polymer-project.org/0.5/components/paper-ripple/paper-ripple.html">
       <link rel="import" href="https://www.polymer-project.org/0.5/components/paper-input/paper-input.html">
 
+      <!-- Uncomment on production -->
       <!--
       <link rel="import" href="../css/polymer.html">
       <style is="custom-style" include="polymer"></style>
       -->
+
       <script src="../js/lib/jquery/external/jquery/jquery.js"></script>
       <script src="../js/lib/jquery/jquery-ui.min.js"></script>
       <script src="../js/lib/jquery/jquery-mobile.min.js"></script>
@@ -140,7 +144,7 @@
 
             <!-- * Storage's section * -->
             <section id="storage_section" class="listSection">
-               <ul id="storage_sectionList">
+               <ul id="storage_sectionList" class="productList">
                   <!--
                   <li class="row" data-id="1">
                      <div class="horizontal">
@@ -157,32 +161,45 @@
                   </li>
                -->
                </ul>
-               <button class="fab raised listFab" onclick="goToHash('#productReg')">
+               <div class="fabList">
+               <button class="fab raised" onclick="goToHash('#productReg')">
                   <!-- TODO fix it -->
                   <i class="material-icons">add</i>
                   <paper-ripple fit/>
                </button>
+               </div>
             </section>
 
 
-            <!-- * Product's view section * -->
+            <!-- * Cart's section * -->
             <section id="cart_section" class="formSection">
                <div class="detailContainer raised">
 
                   <div class="detailContainerHeader">
 
                      <img id="cartSection_img" class="circledImg"/>
-                     <span id="cartSection_labelOut"></span>
+                     <span id="cartSection_labelOut">Your cart</span>
                      <div class="right">
                         <button class="material-icons red" onclick="cartSection_deleteBtn_onClick()">delete</button>
                      </div>
 
                   </div>
-                  <!--
-                  <div class="formRow">
-                     <i class="material-icons">more</i>
-                     <span id="productViewSection_idOut"></span>
-                  </div>-->
+                  <div class="listSection" style="padding-bottom:0;">
+                     <ul id="cartSection_productList" class="productList">
+
+                     </ul>
+                  </div>
+               </div>
+
+               <div class="fabList">
+                  <button class="fab raised">
+                     <i class="material-icons"></i>
+                     <paper-ripple fit/>
+                  </button>
+                  <button class="fab raised">
+                     <i class="material-icons"></i>
+                     <paper-ripple fit/>
+                  </button>
                </div>
             </section>
 
@@ -208,10 +225,12 @@
                   </div>
 
                </form>
-               <button type="submit" form="productRegForm" class="fab raised listFab">
-                  <i class="material-icons">check</i>
-                  <paper-ripple fit/>
-               </button>
+               <div class="fabList">
+                  <button type="submit" form="productRegForm" class="fab raised">
+                     <i class="material-icons">check</i>
+                     <paper-ripple fit/>
+                  </button>
+               </div>
             </section>
 
 
